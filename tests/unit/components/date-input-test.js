@@ -21,6 +21,8 @@ test('it renders', function() {
 });
 
 test('it opens the date picker when focused', function() {
+  expect(2);
+
   this.append();
 
   equal($('.k-calendar-container').css('display'), 'none',
