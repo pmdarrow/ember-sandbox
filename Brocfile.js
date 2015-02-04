@@ -1,6 +1,7 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var pickFiles = require('broccoli-static-compiler');
 
 var app = new EmberApp();
 
@@ -17,4 +18,18 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = app.toTree();
+app.import('vendor/kendo-ui/js/kendo.core.min.js');
+app.import('vendor/kendo-ui/js/kendo.calendar.min.js');
+app.import('vendor/kendo-ui/js/kendo.popup.min.js');
+app.import('vendor/kendo-ui/js/kendo.datepicker.min.js');
+
+app.import('vendor/kendo-ui/styles/kendo.common.min.css');
+app.import('vendor/kendo-ui/styles/kendo.default.min.css');
+
+var kendoSprites = pickFiles('vendor/kendo-ui/styles/Default', {
+   srcDir: '/',
+   files: ['*'],
+   destDir: '/assets/Default'
+});
+
+module.exports = app.toTree(kendoSprites);
